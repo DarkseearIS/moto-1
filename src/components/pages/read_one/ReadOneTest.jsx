@@ -39,6 +39,7 @@ function ReadOneTest() {
     const URL = "http://xn--k1acecair0j.xn--p1ai/"
 
     const [stateImg, setImgState] = useState([0, 1])
+    const [ heightChar, setHeightChar ] = useState(true)
 
     return (
         <>
@@ -92,9 +93,9 @@ function ReadOneTest() {
 
                                     </div>
 
-                                    <div >
+                                    <div>
                                         {/* characteristics */}
-                                        <div style={{ height:'100%', display:'flex', flexDirection:'column' }}>
+                                        <div style={{ height: heightChar ? '590px' : '100%', overflow:'hidden' , display:'flex', flexDirection:'column' }}>
                                             <p style={{ fontWeight:'bold', fontSize:'34px', marginBottom:'20px' }}>Характеристики</p>
 
                                              {/* brand */}
@@ -103,7 +104,7 @@ function ReadOneTest() {
                                                   <p style={{ marginBottom:'10px' }}>  Производитель: </p> 
                                                     <div>
                                                         {
-                                                            read_one.brand && read_one.brand !== undefined && <div>
+                                                            read_one.brand && read_one.brand !== undefined && <div style={{ background: '#4682b42b' }}>
                                                                 {read_one.brand}
                                                             </div>
                                                         }
@@ -115,7 +116,7 @@ function ReadOneTest() {
                                                 Array.isArray(read_one.char) && read_one.char.length > 0 ? <>
                                                     { read_one.char.map((item, index)=><div key={index}>
                 
-                                                        <div className={"title_p__all"}> { item.name && <div> <p style={{ marginBottom:'10px' }}>  {item.name}:   </p> <div> {item.value } </div> </div>} </div>
+                                                        <div className={"title_p__all"}> { item.name && <div> <p style={{ marginBottom:'10px' }}>  {item.name}:   </p> <div style={{ background: '#4682b42b' }}> {item.value } </div> </div>} </div>
 
                                                     </div>)}
                                                 </>
@@ -126,6 +127,11 @@ function ReadOneTest() {
                                                 </>
                                             }
                                         </div>
+                                        {
+                                         Array.isArray(read_one.char)  && read_one.char.length > 0 && <div style={{cursor:'pointer', marginTop: !heightChar && '-15px'}} onClick={()=>{setHeightChar(!heightChar)}} >
+                                            { !heightChar ? "Скрыть" :"Показать все характеристики"}
+                                        </div>
+                                        }
                                         {/* last_receipts */}
                                         <div></div>
                                     </div> 
